@@ -173,16 +173,16 @@ function! panacea#define_default_rules()  "{{{2
   \   {'at': '^\s*\%#$', 'char': '-', 'input': '- '},
   \   {'at': '^\s*- \%#$', 'char': '-', 'input': '<BS>-'},
   \   {'at': '^\s*- \%#$', 'char': ' ', 'input': ''},
-  \   {'at': '^\s*- \%#$', 'char': '<Tab>', 'input': '<Esc>>>A '},
-  \   {'at': '^\s*- \%#$', 'char': '<S-Tab>', 'input': '<Esc><<A '},
-  \   {'at': '^\s*- \%#$', 'char': '<Enter>', 'input': '<BS><BS><Enter>'},
+  \   {'at': '^\s*- \%#$', 'char': '<Tab>', 'input': '<BS><Esc>>>A '},
+  \   {'at': '^\s*- \%#$', 'char': '<S-Tab>', 'input': '<BS><Esc><<A '},
+  \   {'at': '^\s*- \%#$', 'char': '<Enter>', 'input': '<Esc>0Di<Enter>'},
   \   {'at': '^[A-Za-z0-9_].*\%#$', 'char': '.', 'input': '. '},
   \   {'at': '^[A-Za-z0-9_].*\%#$', 'char': '?', 'input': '? '},
   \ ]
   " alphabet capitalization (lookout Clippy!)
   for i in lc_alphabet
       call add(md_rules, {'at': '^\%#$', 'char': i, 'input': i . '<Esc>gUwa'})
-      call add(md_rules, {'at': '[.?!] *\%#$', 'char': i, 'input': i . '<Esc>gUwa'})
+      call add(md_rules, {'at': '[.?!] \%#$', 'char': i, 'input': i . '<Esc>gUwa'})
   endfor
   call urules.add('markdown macro', md_rules)
 "  \   {'at': '(.*{\%#})', 'char': '<Enter>', 'input': '<Enter><Enter><BS><End><Up><Esc>"_A'},
@@ -198,6 +198,7 @@ function! panacea#define_default_rules()  "{{{2
   \   {'at': '\%#:$', 'char': ':', 'input': '<Right>'},
   \   {'at': '(.\+\%#[''"]\?):\?$', 'char': '<Enter>', 'input': '<Esc>o'},
   \   {'at': '^\s\+\%#', 'char': '#', 'input': '# '},
+  \   {'at': '^\s\+# \%#', 'char': '<Space>', 'input': ''},
   \ ])
   " macros for RS, mostly for def completions/expansions
   let rs_rules = [
@@ -217,13 +218,15 @@ function! panacea#define_default_rules()  "{{{2
   " enforce camel-case
   let camelcase_rules = []
   for i in lc_alphabet
-      call add(camelcase_rules, {'at': '[a-z0-9]_\%#$', 'char': i, 'input': i . '<Esc>gUwi<BS><Right>'})
+      call add(camelcase_rules, {'at': '^[^#]*[a-z0-9]_\%#$', 'char': i, 'input': i . '<Esc>gUwi<BS><Right>'})
+      call add(camelcase_rules, {'at': '^from [a-z0-9_]\+_\%#$', 'char': i, 'input': i})
   endfor
   call urules.add('camelCase', camelcase_rules)
   " enforce snake-case
   let snake_rules = []
   for i in uc_alphabet
-      call add(snake_rules, {'at': '[a-z0-9]\%#$', 'char': i, 'input': '_'.i.'<Esc>guwa'})
+      call add(snake_rules, {'at': '^[^#]*[a-z0-9]\%#$', 'char': i, 'input': '_'.i.'<Esc>guwa'})
+      call add(snake_rules, {'at': '^from [a-z0-9]\+\%#$', 'char': i, 'input': i})
   endfor
   call urules.add('snake_case', snake_rules)
   "\   {'at': '\%#\_s*}', 'char': '}', 'input': '<C-r>=panacea#_leave_block(''}'')<Enter><Right>'},
