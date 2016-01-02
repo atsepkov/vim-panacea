@@ -173,6 +173,8 @@ function! panacea#define_default_rules()  "{{{2
   \   {'at': '^\s*\%#$', 'char': '-', 'input': '- '},
   \   {'at': '^\s*- \%#$', 'char': '-', 'input': '<BS>-'},
   \   {'at': '^\s*- \%#$', 'char': ' ', 'input': ''},
+  \   {'at': '^\s*--\%#$', 'char': '-', 'input': '<Esc>0Dkyyp<c-v>$r-jA'},
+  \   {'at': '^\s*==\%#$', 'char': '=', 'input': '<Esc>0Dkyyp<c-v>$r=jA'},
   \   {'at': '^\s*- \%#$', 'char': '<Tab>', 'input': '<BS><Esc>>>A '},
   \   {'at': '^\s*- \%#$', 'char': '<S-Tab>', 'input': '<BS><Esc><<A '},
   \   {'at': '^\s*- \%#$', 'char': '<Enter>', 'input': '<Esc>0Di<Enter>'},
