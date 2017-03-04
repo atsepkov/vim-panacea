@@ -109,15 +109,17 @@ function! panacea#define_default_rules()  "{{{2
   \ ])
   " Rules for escaping out of current block/string/list
   " These are more aggressive than the original versions I removed
-"  call urules.add('Escape patterns', [
-"  \   {'at': '\%#[^)]*)', 'char': ')', 'input': '<C-r>=panacea#_leave_block('')'')<Enter><Right>'},
-"  \   {'at': '\%#[^\]]*\]', 'char': ']', 'input': '<C-r>=panacea#_leave_block('']'')<Enter><Right>'},
-"  \   {'at': '\%#[^}]*}', 'char': '}', 'input': '<C-r>=panacea#_leave_block(''}'')<Enter><Right>'},
-"  \   {'at': '\%#[^"]*"', 'char': '"', 'input': '<C-r>=panacea#_leave_block(''"'')<Enter><Right>'},
-"  \   {'at': '\\\%#[^"]*"', 'char': '"', 'input': '"'},
-"  \   {'at': '\%#[^'']*''', 'char': '''', 'input': '<C-r>=panacea#_leave_block('''''''')<Enter><Right>'},
-"  \   {'at': '\\\%#[^'']*''', 'char': '''', 'input': ''''},
-"  \ ])
+  " The ^[^n]*(n[^n]*)* pattern should match if there is an odd number of
+  " occurences of 'n' before the cursor
+  call urules.add('Escape patterns', [
+  \   {'at': '\%#[^)]*)', 'char': ')', 'input': '<C-r>=panacea#_leave_block('')'')<Enter><Right>'},
+  \   {'at': '\%#[^\]]*\]', 'char': ']', 'input': '<C-r>=panacea#_leave_block('']'')<Enter><Right>'},
+  \   {'at': '\%#[^}]*}', 'char': '}', 'input': '<C-r>=panacea#_leave_block(''}'')<Enter><Right>'},
+  \   {'at': '^[^"]*("[^"]*)*\%#[^"]*"', 'char': '"', 'input': '<C-r>=panacea#_leave_block(''"'')<Enter><Right>'},
+  \   {'at': '\\\%#[^"]*"', 'char': '"', 'input': '"'},
+  \   {'at': '\%#[^'']*''', 'char': '''', 'input': '<C-r>=panacea#_leave_block('''''''')<Enter><Right>'},
+  \   {'at': '\\\%#[^'']*''', 'char': '''', 'input': ''''},
+  \ ])
   " Basic patterns should be supported by all languages (including bash)
   " 1: clean lagging space
   " 2: prevent multiple spaces in a row
