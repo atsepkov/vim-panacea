@@ -109,15 +109,15 @@ function! panacea#define_default_rules()  "{{{2
   \ ])
   " Rules for escaping out of current block/string/list
   " These are more aggressive than the original versions I removed
-  call urules.add('Escape patterns', [
-  \   {'at': '\%#[^)]*)', 'char': ')', 'input': '<C-r>=panacea#_leave_block('')'')<Enter><Right>'},
-  \   {'at': '\%#[^\]]*\]', 'char': ']', 'input': '<C-r>=panacea#_leave_block('']'')<Enter><Right>'},
-  \   {'at': '\%#[^}]*}', 'char': '}', 'input': '<C-r>=panacea#_leave_block(''}'')<Enter><Right>'},
-  \   {'at': '\%#[^"]*"', 'char': '"', 'input': '<C-r>=panacea#_leave_block(''"'')<Enter><Right>'},
-  \   {'at': '\\\%#[^"]*"', 'char': '"', 'input': '"'},
-  \   {'at': '\%#[^'']*''', 'char': '''', 'input': '<C-r>=panacea#_leave_block('''''''')<Enter><Right>'},
-  \   {'at': '\\\%#[^'']*''', 'char': '''', 'input': ''''},
-  \ ])
+"  call urules.add('Escape patterns', [
+"  \   {'at': '\%#[^)]*)', 'char': ')', 'input': '<C-r>=panacea#_leave_block('')'')<Enter><Right>'},
+"  \   {'at': '\%#[^\]]*\]', 'char': ']', 'input': '<C-r>=panacea#_leave_block('']'')<Enter><Right>'},
+"  \   {'at': '\%#[^}]*}', 'char': '}', 'input': '<C-r>=panacea#_leave_block(''}'')<Enter><Right>'},
+"  \   {'at': '\%#[^"]*"', 'char': '"', 'input': '<C-r>=panacea#_leave_block(''"'')<Enter><Right>'},
+"  \   {'at': '\\\%#[^"]*"', 'char': '"', 'input': '"'},
+"  \   {'at': '\%#[^'']*''', 'char': '''', 'input': '<C-r>=panacea#_leave_block('''''''')<Enter><Right>'},
+"  \   {'at': '\\\%#[^'']*''', 'char': '''', 'input': ''''},
+"  \ ])
   " Basic patterns should be supported by all languages (including bash)
   " 1: clean lagging space
   " 2: prevent multiple spaces in a row
@@ -370,7 +370,6 @@ function! panacea#define_default_rules()  "{{{2
   \     urules.table['Python string'],
   \     urules.table['Common patterns'],
   \     urules.table['Escape patterns'],
-  \     urules.table['snake_case'],
   \   ],
   \   'rapydscript': [
   \     urules.table['Python blocks'],
@@ -378,7 +377,6 @@ function! panacea#define_default_rules()  "{{{2
   \     urules.table['RapydScript blocks'],
   \     urules.table['Common patterns'],
   \     urules.table['Escape patterns'],
-  \     urules.table['camelCase'],
   \   ],
   \   'ruby': [
   \     urules.table[''''' as strong quote'],
