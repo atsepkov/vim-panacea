@@ -205,13 +205,14 @@ function! panacea#define_default_rules()  "{{{2
   \   {'at': '^\s\+# \%#', 'char': '<Space>', 'input': ''},
   \ ])
   " macros for RS, mostly for def completions/expansions
+"  \   {'at': '[^A-Za-z0-9_]def(\(.*[^,]\)\?\%#):', 'char': ':', 'input': '<Right><Right><Right>'},
   let rs_rules = [
   \   {'at': '[^A-Za-z0-9_]def\%#$', 'char': '(', 'input': '():<Left><Left>'},
   \   {'at': '[^A-Za-z0-9_]def\%#.\+$', 'char': '(', 'input': '(): ;<Left><Left><Left><Left>'},
-  \   {'at': '[^A-Za-z0-9_]def(\(.*[^,]\)\?\%#):', 'char': ':', 'input': '<Right><Right><Right>'},
-  \   {'at': '[^A-Za-z0-9_]def\(\s[A-Za-z0-9_$]\+\)(\(.*[^,]\)\?\%#):$', 'char': '<Enter>', 'input': '<Right><Right><Enter>'},
+  \   {'at': '[^A-Za-z0-9_]def\(\s\?[A-Za-z0-9_$]\+\)(\(.*[^,]\)\?\%#):$', 'char': '<Enter>', 'input': '<Right><Right><Enter>'},
   \   {'at': '[^A-Za-z0-9_]def(\(.*[^,]\)\?\%#):\s;', 'char': '<Enter>', 'input': '<Right><Right><Right><BS><Del><Enter><Esc>O'},
   \   {'at': '[^A-Za-z0-9_]def(\(.*[^,]\)\?):\s\%#;', 'char': '<Enter>', 'input': '<BS><Del><Enter><Esc>O'},
+  \   {'at': '[^A-Za-z0-9_]def(\(.*[^,]\)\?):\%#\s;', 'char': '<Enter>', 'input': '<Del><Del><Enter><Esc>O'},
   \ ]
   " code conventions
   for i in lc_alphabet
